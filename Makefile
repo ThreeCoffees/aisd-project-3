@@ -1,5 +1,5 @@
 FLAGS += -ggdb3
-SRCS := $(shell find . -name '*.c')
+SRCS := $(shell find . -name '*.cpp')
 HEADERS := $(shell find . -name '*.h')
 
 OUTPUT := app
