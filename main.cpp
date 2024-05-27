@@ -47,7 +47,6 @@ void print_graph_info(graph_t * graph){
     number_of_c4_subgraphs(graph);      //TODO
     number_of_complements_edges(graph); 
 
-
     printf("\n");
 }
 
