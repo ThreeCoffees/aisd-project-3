@@ -6,12 +6,12 @@ void create_graph_vertices(graph_t * graph){
     graph->vertices = vertices;
     for(unsigned int i = 0; i < graph->v_count; i++){
         unsigned int s;
-        scanf("%d", &s);
+        scanf("%u", &s);
         vertices[i].n_count = 0;
         vertices[i].neighbors = (unsigned int *) calloc(s, sizeof(unsigned int));
         for(unsigned int j = 0; j < s; j++){
             unsigned int n_i;
-            scanf("%d", &n_i);
+            scanf("%u", &n_i);
             n_i--;
             add_graph_edge(graph, i, n_i);
         }

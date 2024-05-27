@@ -45,8 +45,7 @@ void print_graph_info(graph_t * graph){
     planarity(graph);                   //TODO
     vertices_colors(graph);             //TODO
     number_of_c4_subgraphs(graph);      //TODO
-    printf("?\n");
-    //number_of_complements_edges(graph); 
+    number_of_complements_edges(graph); 
 
 
     printf("\n");
