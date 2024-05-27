@@ -1,7 +1,7 @@
 #include "eccentricity_of_vertices.h"
 
 void eccentricity_bfs(graph_t * graph, unsigned int curr, unsigned int * max_distance){
-    int f = 0, r = 0;
+    unsigned int f = 0, r = 0;
 
     bool * visited = (bool *) calloc(graph->v_count, sizeof(bool));
     unsigned int * distances = (unsigned int *) calloc(graph->v_count, sizeof(unsigned int));
@@ -14,7 +14,7 @@ void eccentricity_bfs(graph_t * graph, unsigned int curr, unsigned int * max_dis
 
     while(f != r){
         curr = queue[f];
-        int curr_dist = distances[f];
+        unsigned int curr_dist = distances[f];
         f++;
         if(curr_dist >= *max_distance) *max_distance = curr_dist;
 
