@@ -6,11 +6,21 @@
 #include "number_of_components.h"
 #include "number_of_complements_edges.h"
 
+
+void eccentricity_bfs(graph_t * graph, unsigned int curr, unsigned int * queue, unsigned int * distances){
+    unsigned int f = 0, r = 0;
+}
+
 void bipartiteness(graph_t * graph){
     printf("?\n");
 }
 
 void eccentricity_of_vertices(graph_t * graph){
+    unsigned int * distances = (unsigned int *) calloc(graph->v_count, sizeof(unsigned int));
+    unsigned int * queue = (unsigned int *) calloc(graph->v_count, sizeof(unsigned int));
+    eccentricity_bfs(graph, 0, queue, distances);
+    free(distances);
+    free(queue);
     printf("?\n");
 }
 
@@ -19,6 +29,8 @@ void planarity(graph_t * graph){
 }
 
 void vertices_colors(graph_t * graph){
+    printf("?\n");
+    printf("?\n");
     printf("?\n");
 }
 
@@ -34,39 +46,27 @@ void print_graph_info(graph_t * graph){
     planarity(graph);                   //TODO
     vertices_colors(graph);             //TODO
     number_of_c4_subgraphs(graph);      //TODO
-    number_of_complements_edges(graph); 
+    printf("?\n");
+    //number_of_complements_edges(graph); 
 
 
     printf("\n");
 }
 
 void handle_graph(){
-    int n;
+    unsigned int n;
     scanf("%d", &n);
     graph_t * graph = create_new_graph(n);
 
-    for(int i = 0; i < n; i++){
-        int s;
-        scanf("%d", &s);
-        for(int j = 0; j < s; j++){
-            int n_i;
-            scanf("%d", &n_i);
-            n_i--;
-            add_graph_edge(graph, i, n_i);
-        }
-    }
-    print_graph_dbg(graph);
-
     print_graph_info(graph);
-
 
     delete_graph(graph);
 }
 
 int main(){
-    int k;
+    unsigned int k;
     scanf("%d", &k);
-    for(int i = 0; i < k; i++){
+    for(unsigned int i = 0; i < k; i++){
         handle_graph();
     }
     return 0;

@@ -1,18 +1,19 @@
 #include "degree_sequence.h"
 
 void degree_sequence(graph_t * graph){
-    int * degrees = (int *) calloc(graph->v_count+1, sizeof(int));
-    for(int i = 0; i < graph->v_count + 1; i++){
+    unsigned int * degrees = (unsigned int *) calloc(graph->v_count, sizeof(unsigned int));
+    for(unsigned int i = 0; i < graph->v_count; i++){
         degrees[i] = 0;
     }
-    for(int i = 0; i < graph->v_count; i++){
+    for(unsigned int i = 0; i < graph->v_count; i++){
         degrees[graph->vertices[i].n_count]++;
     }
 
-    for(int i = graph->v_count; i >= 0; i--){
-        for(int j = 0; j < degrees[i]; j++){
-            printf("%d ",i);
+    for(unsigned int i = graph->v_count-1; i > 0; i--){
+        for(unsigned int j = 0; j < degrees[i]; j++){
+            printf("%u ",i);
         }
     }
     printf("\n");
+    free(degrees);
 }
