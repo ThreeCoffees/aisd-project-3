@@ -23,7 +23,7 @@ void number_of_components(graph_t * graph){
         c_count++;
     }
 
-    printf("%d", c_count);
+    printf("%u", c_count);
 
     free(visited);
 

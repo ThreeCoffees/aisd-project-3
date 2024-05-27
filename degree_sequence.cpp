@@ -9,9 +9,9 @@ void degree_sequence(graph_t * graph){
         degrees[graph->vertices[i].n_count]++;
     }
 
-    for(unsigned int i = graph->v_count-1; i > 0; i--){
-        for(unsigned int j = 0; j < degrees[i]; j++){
-            printf("%u ",i);
+    for(unsigned int i = 0; i < graph->v_count; i++){
+        for(unsigned int j = 0; j < degrees[graph->v_count - i - 1]; j++){
+            printf("%u ",graph->v_count - i - 1);
         }
     }
     printf("\n");

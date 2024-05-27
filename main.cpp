@@ -8,7 +8,6 @@
 
 
 void eccentricity_bfs(graph_t * graph, unsigned int curr, unsigned int * queue, unsigned int * distances){
-    unsigned int f = 0, r = 0;
 }
 
 void bipartiteness(graph_t * graph){
@@ -55,7 +54,7 @@ void print_graph_info(graph_t * graph){
 
 void handle_graph(){
     unsigned int n;
-    scanf("%d", &n);
+    scanf("%u", &n);
     graph_t * graph = create_new_graph(n);
 
     print_graph_info(graph);
@@ -65,7 +64,7 @@ void handle_graph(){
 
 int main(){
     unsigned int k;
-    scanf("%d", &k);
+    scanf("%u", &k);
     for(unsigned int i = 0; i < k; i++){
         handle_graph();
     }
