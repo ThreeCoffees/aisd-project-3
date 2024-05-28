@@ -30,7 +30,7 @@ void print_graph_info(graph_t * graph){
     degree_sequence(graph);
     number_of_components(graph);        
     bipartiteness(graph);               //TODO
-    eccentricity_of_vertices(graph);    //TODO
+    eccentricity_of_vertices(graph);    
     planarity(graph);                   //TODO
     vertices_colors(graph);             //TODO
     number_of_c4_subgraphs(graph);      //TODO

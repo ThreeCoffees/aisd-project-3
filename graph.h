@@ -4,11 +4,13 @@
 #include "stdlib.h"
 
 typedef struct{
+    unsigned int skl_sp;
     unsigned int n_count;
     unsigned int * neighbors;
 }graph_vert_t;
 
 typedef struct{
+    unsigned int * skl_sp_v_counts;
     unsigned int v_count;
     graph_vert_t * vertices;
 }graph_t;

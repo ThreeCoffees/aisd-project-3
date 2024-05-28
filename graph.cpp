@@ -1,5 +1,6 @@
 #include "graph.h"
 #include <cstdio>
+#include <cstdlib>
 
 void create_graph_vertices(graph_t * graph){
     graph_vert_t * vertices = (graph_vert_t *) calloc(graph->v_count, sizeof(graph_vert_t));
@@ -22,6 +23,7 @@ void create_graph_vertices(graph_t * graph){
 graph_t * create_new_graph(unsigned int v_count){
     graph_t * graph = (graph_t*) malloc(sizeof(graph_t));
     graph->v_count = v_count;
+    graph->skl_sp_v_counts = (unsigned int *) calloc(v_count, sizeof(unsigned int));
     create_graph_vertices(graph);
 
     return graph;
@@ -36,6 +38,7 @@ void delete_graph(graph_t * graph){
         delete_graph_vert(&(graph->vertices[i]));
     }
     free(graph->vertices);
+    free(graph->skl_sp_v_counts);
     free(graph);
 }
 
