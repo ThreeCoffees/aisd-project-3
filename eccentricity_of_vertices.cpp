@@ -21,14 +21,14 @@ void eccentricity_bfs(graph_t * graph, unsigned int curr, unsigned int * max_dis
                 visited[neigbor] = true;
                 queue[r] = neigbor;
                 distances[r] = curr_dist+1;
-                if(r+1 == graph->skl_sp_v_counts[graph->vertices[curr].skl_sp]){
+
+                if(r+1 >= graph->skl_sp_v_counts[graph->vertices[curr].skl_sp]){
                     *max_distance = distances[r];
                     free(visited);
                     return;
                 }
 
                 r++;
-
             }
         }
     }
@@ -37,8 +37,8 @@ void eccentricity_bfs(graph_t * graph, unsigned int curr, unsigned int * max_dis
 
 
 void eccentricity_of_vertices(graph_t * graph){
-    unsigned int * distances = (unsigned int *) calloc(graph->v_count, sizeof(unsigned int));
-    unsigned int * queue = (unsigned int *) calloc(graph->v_count, sizeof(unsigned int));
+    unsigned int * distances = (unsigned int *) malloc(graph->v_count* sizeof(unsigned int));
+    unsigned int * queue = (unsigned int *) malloc(graph->v_count* sizeof(unsigned int));
 
     for(unsigned int i = 0; i < graph->v_count; i++){
         unsigned int max_distance = 0;

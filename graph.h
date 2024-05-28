@@ -12,6 +12,7 @@ typedef struct{
 typedef struct{
     unsigned int * skl_sp_v_counts;
     unsigned int v_count;
+    unsigned int edge_count;
     graph_vert_t * vertices;
 }graph_t;
 
