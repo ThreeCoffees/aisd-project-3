@@ -7,7 +7,7 @@ void merge(unsigned int * arr, unsigned int *tmp, unsigned int l, unsigned int r
 
     unsigned int i = l;
     unsigned int j = m+1;
-    for(int k = l; k < r+1; k++){
+    for(unsigned int k = l; k < r+1; k++){
         if(i > m){
             arr[k] = tmp[j];
             j++;

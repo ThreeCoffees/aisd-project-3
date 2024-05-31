@@ -9,7 +9,12 @@
 #include "number_of_complements_edges.h"
 
 void bipartiteness(graph_t * graph){
-    printf("?\n");
+    if(graph->is_bipartite){
+        printf("T\n");
+    }
+    else{
+        printf("F\n");
+    }
 }
 
 void planarity(graph_t * graph){

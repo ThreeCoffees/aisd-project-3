@@ -22,6 +22,7 @@ graph_t * create_new_graph(unsigned int v_count){
     graph_t * graph = (graph_t*) malloc(sizeof(graph_t));
     graph->v_count = v_count;
     graph->edge_count = 0;
+    graph->is_bipartite = true;
     graph->skl_sp_v_counts = (unsigned int *) calloc(v_count, sizeof(unsigned int));
     create_graph_vertices(graph);
 

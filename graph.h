@@ -10,6 +10,7 @@ typedef struct{
 }graph_vert_t;
 
 typedef struct{
+    bool is_bipartite;
     unsigned int * skl_sp_v_counts;
     unsigned int v_count;
     unsigned int edge_count;
