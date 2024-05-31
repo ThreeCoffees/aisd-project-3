@@ -30,20 +30,21 @@ void vertices_colors(graph_t * graph){
 #define MAX_DFS_DEPTH 4
 
 void cycle_detection_dfs(long long * c4_count, graph_t * graph, unsigned int curr, bool * visited, int curr_depth, unsigned int first_vert){
-    visited[curr] = 1;
-
-    if(curr_depth <= MAX_DFS_DEPTH){
-        for(unsigned int i = 0; i < graph->vertices[curr].n_count; i++){
-            unsigned int curr_neighbor = graph->vertices[curr].neighbors[i];
-            if(curr_depth == MAX_DFS_DEPTH && curr_neighbor == first_vert){
-                (*c4_count)++;
-            }
-            if(visited[curr_neighbor] == true) continue;
-
-            cycle_detection_dfs(c4_count, graph, curr_neighbor, visited, curr_depth+1, first_vert);
-        }
+    if(curr_depth > MAX_DFS_DEPTH){
+        return; 
     }
 
+    visited[curr] = 1;
+
+    for(unsigned int i = 0; i < graph->vertices[curr].n_count; i++){
+        unsigned int curr_neighbor = graph->vertices[curr].neighbors[i];
+        if(curr_depth == MAX_DFS_DEPTH && curr_neighbor == first_vert){
+            (*c4_count)++;
+        }
+        if(visited[curr_neighbor] == true) continue;
+
+        cycle_detection_dfs(c4_count, graph, curr_neighbor, visited, curr_depth+1, first_vert);
+    }
     visited[curr] = 0;
 }
 
