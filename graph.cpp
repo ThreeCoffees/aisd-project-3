@@ -67,7 +67,7 @@ unsigned int * order_vertices_by_degree(graph_t * graph){
     }
 
     mergeSort(ordered_verts, tmp, 0, graph->v_count-1, [graph](unsigned int a, unsigned int b)->bool{
-            return graph->vertices[a].n_count <= graph->vertices[b].n_count;
+            return graph->vertices[a].n_count < graph->vertices[b].n_count;
             });
     
 
