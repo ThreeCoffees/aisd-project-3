@@ -76,9 +76,13 @@ void vertices_colors(graph_t * graph){
 
     free(greedy_colors);
 
-    //printf("?\n");
     //lf
-    printf("?\n");
+    unsigned int * lf_colors = (unsigned int *) calloc(graph->v_count, sizeof(unsigned int));
+    
+
+
+    free(lf_colors);
+    //printf("?\n");
     //slf
     printf("?\n");
 }

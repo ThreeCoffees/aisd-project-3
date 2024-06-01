@@ -1,6 +1,7 @@
 #include "degree_sequence.h"
 
-void merge(unsigned int * arr, unsigned int *tmp, unsigned int l, unsigned int r, unsigned int m){
+template <typename F>
+void merge(unsigned int * arr, unsigned int *tmp, unsigned int l, unsigned int r, unsigned int m, F&& cmp){
     for(unsigned int i = l; i < r+1; i++){
         tmp[i] = arr[i];
     }
@@ -17,7 +18,7 @@ void merge(unsigned int * arr, unsigned int *tmp, unsigned int l, unsigned int r
             i++;
         }
         else{
-            if(tmp[i] <= tmp[j]){
+            if(cmp(tmp[i], tmp[j])){
                 arr[k] = tmp[j];
                 j++;
             }
@@ -29,14 +30,15 @@ void merge(unsigned int * arr, unsigned int *tmp, unsigned int l, unsigned int r
     }
 }
 
-void mergeSort(unsigned int * arr, unsigned int *tmp, int l, int r){
+template <typename F>
+void mergeSort(unsigned int * arr, unsigned int *tmp, int l, int r, F&& cmp){
     if(l >= r) return;
     unsigned int m = (r+l)/2;
 
-    mergeSort(arr, tmp, l, m);
-    mergeSort(arr, tmp, m+1, r);
+    mergeSort(arr, tmp, l, m, cmp);
+    mergeSort(arr, tmp, m+1, r, cmp);
 
-    merge(arr, tmp, l, r, m);
+    merge(arr, tmp, l, r, m, cmp);
 }
 
 void degree_sequence(graph_t * graph){
@@ -46,7 +48,9 @@ void degree_sequence(graph_t * graph){
     }
 
     unsigned int * tmp = (unsigned int *) malloc(graph->v_count* sizeof(unsigned int));
-    mergeSort(degrees, tmp, 0, graph->v_count-1);
+    mergeSort(degrees, tmp, 0, graph->v_count-1, [](int a, int b){
+            return a <= b;
+            });
     for(unsigned int i = 0; i < graph->v_count; i++){
         printf("%u ", degrees[i]);
     }
