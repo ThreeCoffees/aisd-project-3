@@ -82,7 +82,7 @@ void vertices_colors(graph_t * graph){
 
 
     free(lf_colors);
-    //printf("?\n");
+    printf("?\n");
     //slf
     printf("?\n");
 }

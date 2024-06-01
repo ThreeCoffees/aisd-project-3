@@ -12,10 +12,19 @@ typedef struct{
 typedef struct{
     bool is_bipartite;
     unsigned int * skl_sp_v_counts;
+    unsigned int * vertices_by_degree;
     unsigned int v_count;
     unsigned int edge_count;
     graph_vert_t * vertices;
 }graph_t;
+
+template <typename F>
+void merge(unsigned int * arr, unsigned int *tmp, unsigned int l, unsigned int r, unsigned int m, F&& cmp);
+
+template <typename F>
+void mergeSort(unsigned int * arr, unsigned int *tmp, int l, int r, F&& cmp);
+
+unsigned int * order_vertices_by_degree(graph_t * graph);
 
 void create_graph_vertices(unsigned int v_count);
 

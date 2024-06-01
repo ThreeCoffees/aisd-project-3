@@ -1,60 +1,8 @@
 #include "degree_sequence.h"
 
-template <typename F>
-void merge(unsigned int * arr, unsigned int *tmp, unsigned int l, unsigned int r, unsigned int m, F&& cmp){
-    for(unsigned int i = l; i < r+1; i++){
-        tmp[i] = arr[i];
-    }
-
-    unsigned int i = l;
-    unsigned int j = m+1;
-    for(unsigned int k = l; k < r+1; k++){
-        if(i > m){
-            arr[k] = tmp[j];
-            j++;
-        }
-        else if(j > r){
-            arr[k] = tmp[i];
-            i++;
-        }
-        else{
-            if(cmp(tmp[i], tmp[j])){
-                arr[k] = tmp[j];
-                j++;
-            }
-            else{
-                arr[k] = tmp[i];
-                i++;
-            }
-        }
-    }
-}
-
-template <typename F>
-void mergeSort(unsigned int * arr, unsigned int *tmp, int l, int r, F&& cmp){
-    if(l >= r) return;
-    unsigned int m = (r+l)/2;
-
-    mergeSort(arr, tmp, l, m, cmp);
-    mergeSort(arr, tmp, m+1, r, cmp);
-
-    merge(arr, tmp, l, r, m, cmp);
-}
-
 void degree_sequence(graph_t * graph){
-    unsigned int * degrees = (unsigned int *) malloc(graph->v_count* sizeof(unsigned int));
     for(unsigned int i = 0; i < graph->v_count; i++){
-        degrees[i] = graph->vertices[i].n_count;
-    }
-
-    unsigned int * tmp = (unsigned int *) malloc(graph->v_count* sizeof(unsigned int));
-    mergeSort(degrees, tmp, 0, graph->v_count-1, [](int a, int b){
-            return a <= b;
-            });
-    for(unsigned int i = 0; i < graph->v_count; i++){
-        printf("%u ", degrees[i]);
+        printf("%u ", graph->vertices[graph->vertices_by_degree[i]].n_count);
     }
     printf("\n");
-    free(tmp);
-    free(degrees);
 }
