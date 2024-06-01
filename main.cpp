@@ -7,6 +7,7 @@
 #include "number_of_components.h"
 #include "eccentricity_of_vertices.h"
 #include "number_of_complements_edges.h"
+#include <cstdlib>
 
 void bipartiteness(graph_t * graph){
     if(graph->is_bipartite){
@@ -15,16 +16,6 @@ void bipartiteness(graph_t * graph){
     else{
         printf("F\n");
     }
-}
-
-void planarity(graph_t * graph){
-    printf("?\n");
-}
-
-void vertices_colors(graph_t * graph){
-    printf("?\n");
-    printf("?\n");
-    printf("?\n");
 }
 
 #define MAX_DFS_DEPTH 4
@@ -61,6 +52,38 @@ void number_of_c4_subgraphs(graph_t * graph){
     printf("%lld\n", c4_count);
 }
 
+void planarity(graph_t * graph){
+    printf("?\n");
+}
+
+void vertices_colors(graph_t * graph){
+    //greedy
+    unsigned int * greedy_colors = (unsigned int *) calloc(graph->v_count, sizeof(unsigned int));
+    for(unsigned int i = 0; i < graph->v_count; i++){
+        unsigned int curr_color = 1;
+        for(unsigned int j = 0; j < graph->vertices[i].n_count;){
+            if(greedy_colors[graph->vertices[i].neighbors[j]] != curr_color) {
+                j++;
+                continue;
+            }
+            curr_color++;
+            j = 0;
+        }
+        greedy_colors[i] = curr_color;
+        printf("%u ", curr_color);
+    }
+    printf("\n");
+
+    free(greedy_colors);
+
+    //printf("?\n");
+    //lf
+    printf("?\n");
+    //slf
+    printf("?\n");
+}
+
+
 void print_graph_info(graph_t * graph){
     degree_sequence(graph);
     number_of_components(graph);        
@@ -68,7 +91,8 @@ void print_graph_info(graph_t * graph){
     eccentricity_of_vertices(graph);    
     planarity(graph);                   //TODO
     vertices_colors(graph);             //TODO
-    number_of_c4_subgraphs(graph);      //TODO
+    //number_of_c4_subgraphs(graph);      //TODO
+    printf("?\n");
     number_of_complements_edges(graph); 
 
     printf("\n");
