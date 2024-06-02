@@ -55,7 +55,23 @@ void create_graph_vertices(graph_t * graph){
             n_i--;
             add_graph_edge(graph, i, n_i);
         }
+
     }
+
+    for(unsigned int i = 0; i < graph->v_count; i++){
+        unsigned int * neigbors_by_degree = (unsigned int * )malloc(vertices[i].n_count * sizeof(unsigned int));
+        for(unsigned int j = 0; j < graph->vertices[i].n_count; j++){
+            neigbors_by_degree[j] = graph->vertices[i].neighbors[j];
+        }
+        unsigned int * tmp = (unsigned int * )malloc(vertices[i].n_count * sizeof(unsigned int));
+        mergeSort(neigbors_by_degree, tmp, 0, vertices[i].n_count-1, [graph](unsigned int a, unsigned int b)->bool{
+                return graph->vertices[a].n_count > graph->vertices[b].n_count;
+                });
+        graph->vertices[i].neighbors_by_degree = neigbors_by_degree;
+
+        free(tmp);
+    }
+
     return;
 }
 
@@ -89,6 +105,7 @@ graph_t * create_new_graph(unsigned int v_count){
 
 void delete_graph_vert(graph_vert_t * vert){
     free(vert->neighbors);
+    free(vert->neighbors_by_degree);
 }
 
 void delete_graph(graph_t * graph){

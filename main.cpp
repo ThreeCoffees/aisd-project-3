@@ -15,8 +15,6 @@ void planarity(graph_t * graph){
     printf("?\n");
 }
 
-
-
 void print_graph_info(graph_t * graph){
     degree_sequence(graph);
     number_of_components(graph);        
@@ -24,8 +22,7 @@ void print_graph_info(graph_t * graph){
     eccentricity_of_vertices(graph);    
     planarity(graph);                   //TODO
     vertices_colors(graph);             
-    //number_of_c4_subgraphs(graph);      //TODO
-    printf("?\n");
+    number_of_c4_subgraphs(graph);      //TODO
     number_of_complements_edges(graph); 
 
     printf("\n");

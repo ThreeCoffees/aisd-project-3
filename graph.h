@@ -7,6 +7,7 @@ typedef struct{
     unsigned int skl_sp;
     unsigned int n_count;
     unsigned int * neighbors;
+    unsigned int * neighbors_by_degree;
 }graph_vert_t;
 
 typedef struct{
