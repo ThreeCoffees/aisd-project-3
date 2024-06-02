@@ -1,4 +1,4 @@
-#include "number_of_components.h"
+#include "number_of_components_bipartitness.h"
 #include "graph.h"
 
 void dfs(graph_t * graph, unsigned int curr, bool * visited, unsigned int skl_sp_id, bool * bipartite_color, bool prev_bipartite_color){
@@ -40,3 +40,13 @@ void number_of_components(graph_t * graph){
 
     printf("\n");
 }
+
+void bipartiteness(graph_t * graph){
+    if(graph->is_bipartite){
+        printf("T\n");
+    }
+    else{
+        printf("F\n");
+    }
+}
+

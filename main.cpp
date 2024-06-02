@@ -4,99 +4,17 @@
 #include "graph.h"
 
 #include "degree_sequence.h"
-#include "number_of_components.h"
+#include "number_of_components_bipartitness.h"
 #include "eccentricity_of_vertices.h"
+#include "vert_color.h"
+#include "c4_count.h"
 #include "number_of_complements_edges.h"
 
-void bipartiteness(graph_t * graph){
-    if(graph->is_bipartite){
-        printf("T\n");
-    }
-    else{
-        printf("F\n");
-    }
-}
-
-#define MAX_DFS_DEPTH 4
-
-void cycle_detection_dfs(long long * c4_count, graph_t * graph, unsigned int curr, bool * visited, int curr_depth, unsigned int first_vert){
-    if(curr_depth > MAX_DFS_DEPTH){
-        return; 
-    }
-
-    visited[curr] = 1;
-
-    for(unsigned int i = 0; i < graph->vertices[curr].n_count; i++){
-        unsigned int curr_neighbor = graph->vertices[curr].neighbors[i];
-        if(curr_depth == MAX_DFS_DEPTH && curr_neighbor == first_vert){
-            (*c4_count)++;
-        }
-        if(visited[curr_neighbor] == true) continue;
-
-        cycle_detection_dfs(c4_count, graph, curr_neighbor, visited, curr_depth+1, first_vert);
-    }
-    visited[curr] = 0;
-}
-
-void number_of_c4_subgraphs(graph_t * graph){
-    bool * visited = (bool *) calloc(graph->v_count, sizeof(bool));
-    long long c4_count = 0;
-    for(unsigned int i = 0; i < graph->v_count; i++){
-        cycle_detection_dfs(&c4_count, graph, i, visited, 1, i);
-    }
-
-    c4_count /= 8;
-
-    free(visited);
-    printf("%lld\n", c4_count);
-}
 
 void planarity(graph_t * graph){
     printf("?\n");
 }
 
-void color_vert(graph_t * graph, unsigned int * colors, unsigned int curr_vert){
-    unsigned int curr_color = 1;
-    for(unsigned int j = 0; j < graph->vertices[curr_vert].n_count;){
-        if(colors[graph->vertices[curr_vert].neighbors[j]] != curr_color) {
-            j++;
-            continue;
-        }
-        curr_color++;
-        j = 0;
-    }
-    colors[curr_vert] = curr_color;
-}
-
-void vertices_colors(graph_t * graph){
-    //greedy
-    unsigned int * greedy_colors = (unsigned int *) calloc(graph->v_count, sizeof(unsigned int));
-    for(unsigned int i = 0; i < graph->v_count; i++){
-        color_vert(graph, greedy_colors, i);
-    }
-    for(unsigned int i = 0; i < graph->v_count; i++){
-        printf("%u ", greedy_colors[i]);
-    }
-    printf("\n");
-
-    free(greedy_colors);
-
-    //lf
-    unsigned int * lf_colors = (unsigned int *) calloc(graph->v_count, sizeof(unsigned int));
-    
-    for(unsigned int i = 0; i < graph->v_count; i++){
-        color_vert(graph, lf_colors, graph->vertices_by_degree[i]);
-    }
-    for(unsigned int i = 0; i < graph->v_count; i++){
-        printf("%u ", lf_colors[i]);
-    }
-    printf("\n");
-
-    free(lf_colors);
-
-    //slf
-    printf("?\n");
-}
 
 
 void print_graph_info(graph_t * graph){
@@ -105,7 +23,7 @@ void print_graph_info(graph_t * graph){
     bipartiteness(graph);               
     eccentricity_of_vertices(graph);    
     planarity(graph);                   //TODO
-    vertices_colors(graph);             //TODO
+    vertices_colors(graph);             
     //number_of_c4_subgraphs(graph);      //TODO
     printf("?\n");
     number_of_complements_edges(graph); 
